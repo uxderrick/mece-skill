@@ -21,28 +21,50 @@ This is expensive when you're writing product specs, designing APIs, planning ro
 
 ## Install
 
-### Claude Code
+### Universal (all agents)
+The `.agents/skills/` directory is recognized by all major agents:
 ```bash
 git clone https://github.com/uxderrick/mece-skill.git
+mkdir -p ~/.agents/skills
+cp -r mece-skill/skills/mece ~/.agents/skills/mece
+```
+
+### Claude Code
+```bash
 mkdir -p ~/.claude/skills
 cp -r mece-skill/skills/mece ~/.claude/skills/mece
 ```
 
 ### Cursor
 ```bash
-git clone https://github.com/uxderrick/mece-skill.git
-cp -r mece-skill/skills/mece .cursor/skills/mece
+mkdir -p ~/.cursor/skills
+cp -r mece-skill/skills/mece ~/.cursor/skills/mece
 ```
 
-### VS Code / Copilot
+### VS Code / GitHub Copilot
 ```bash
-git clone https://github.com/uxderrick/mece-skill.git
-cp -r mece-skill/skills/mece .github/skills/mece
+mkdir -p ~/.copilot/skills
+cp -r mece-skill/skills/mece ~/.copilot/skills/mece
 ```
 
-### Universal (any Agent Skills-compatible tool)
+### Codex (OpenAI)
 ```bash
-npx agent-skills-cli add uxderrick/mece-skill
+mkdir -p ~/.agents/skills
+cp -r mece-skill/skills/mece ~/.agents/skills/mece
+```
+
+### Gemini CLI
+```bash
+mkdir -p ~/.gemini/skills
+cp -r mece-skill/skills/mece ~/.gemini/skills/mece
+```
+
+### Project-level install
+Add to a specific project instead of globally:
+```bash
+# Works across agents
+mkdir -p .agents/skills
+cp -r mece-skill/skills/mece .agents/skills/mece
 ```
 
 ## Usage
