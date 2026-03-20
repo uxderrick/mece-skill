@@ -21,50 +21,26 @@ This is expensive when you're writing product specs, designing APIs, planning ro
 
 ## Install
 
-### Universal (all agents)
-The `.agents/skills/` directory is recognized by all major agents:
+First, clone the repo:
 ```bash
 git clone https://github.com/uxderrick/mece-skill.git
-mkdir -p ~/.agents/skills
-cp -r mece-skill/skills/mece ~/.agents/skills/mece
 ```
 
-### Claude Code
-```bash
-mkdir -p ~/.claude/skills
-cp -r mece-skill/skills/mece ~/.claude/skills/mece
-```
+Then copy to your agent's skills directory:
 
-### Cursor
-```bash
-mkdir -p ~/.cursor/skills
-cp -r mece-skill/skills/mece ~/.cursor/skills/mece
-```
-
-### VS Code / GitHub Copilot
-```bash
-mkdir -p ~/.copilot/skills
-cp -r mece-skill/skills/mece ~/.copilot/skills/mece
-```
-
-### Codex (OpenAI)
-```bash
-mkdir -p ~/.agents/skills
-cp -r mece-skill/skills/mece ~/.agents/skills/mece
-```
-
-### Gemini CLI
-```bash
-mkdir -p ~/.gemini/skills
-cp -r mece-skill/skills/mece ~/.gemini/skills/mece
-```
+| Agent | Command |
+|-------|---------|
+| **Claude Code** | `mkdir -p ~/.claude/skills && cp -r mece-skill/skills/mece ~/.claude/skills/mece` |
+| **Cursor** | `mkdir -p ~/.cursor/skills && cp -r mece-skill/skills/mece ~/.cursor/skills/mece` |
+| **VS Code / Copilot** | `mkdir -p ~/.copilot/skills && cp -r mece-skill/skills/mece ~/.copilot/skills/mece` |
+| **Codex (OpenAI)** | `mkdir -p ~/.agents/skills && cp -r mece-skill/skills/mece ~/.agents/skills/mece` |
+| **Gemini CLI** | `mkdir -p ~/.gemini/skills && cp -r mece-skill/skills/mece ~/.gemini/skills/mece` |
+| **Universal (all agents)** | `mkdir -p ~/.agents/skills && cp -r mece-skill/skills/mece ~/.agents/skills/mece` |
 
 ### Project-level install
-Add to a specific project instead of globally:
+Add to a specific repo instead of globally:
 ```bash
-# Works across agents
-mkdir -p .agents/skills
-cp -r mece-skill/skills/mece .agents/skills/mece
+mkdir -p .agents/skills && cp -r mece-skill/skills/mece .agents/skills/mece
 ```
 
 ## Usage
