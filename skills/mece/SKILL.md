@@ -25,13 +25,6 @@ For each pair of categories, ask:
 - Is the same concept described with different names in different categories?
 - Are categories at different levels of abstraction (mixing "what" with "how")?
 
-Flag every overlap found with:
-```
-OVERLAP: [Category A] ↔ [Category B]
-Reason: [why they overlap]
-Fix: [how to redraw the boundary]
-```
-
 **Step 3 — Test for Collective Exhaustiveness**
 Ask:
 - What real-world scenarios, items, or cases exist that don't fit any category?
@@ -39,34 +32,73 @@ Ask:
 - Is there an implicit "other" bucket that should be explicit?
 - Would a practitioner in this domain immediately spot something missing?
 
-Flag every gap found with:
-```
-GAP: [What's missing]
-Reason: [why it matters]
-Fix: [which category to add or expand]
-```
+**Step 4 — Score and report**
 
-**Step 4 — Deliver the report**
+Calculate a MECE Score out of 100:
+- Start at 100
+- Each overlap: -10 points (categories counting the same thing twice)
+- Each critical gap: -15 points (missing something that will cause rework or failure)
+- Each minor gap: -5 points (missing something that can be added later without rework)
+- Minimum score: 0
+
+Classify each finding by severity:
+- 🔴 **Critical**: Will cause rework, duplication, or missed requirements in implementation
+- 🟡 **Moderate**: Should be addressed but won't block progress
+- 🟢 **Minor**: Nice to fix, low impact if deferred
+
+**Step 5 — Deliver the report**
 
 Format the output as:
 
 ```
-## MECE Validation
+MECE Score: [N]/100
 
-### Summary
-- Categories reviewed: [N]
-- Overlaps found: [N]
-- Gaps found: [N]
-- Verdict: [MECE ✓ | NOT MECE — overlaps | NOT MECE — gaps | NOT MECE — both]
+[For each finding, in severity order:]
 
-### Overlaps
-[List each overlap with reason and fix, or "None found"]
+🔴 OVERLAP: "[Category A]" ↔ "[Category B]"
+   [One line: why these overlap and what the impact is]
 
-### Gaps
-[List each gap with reason and fix, or "None found"]
+🔴 CRITICAL GAP: [What's missing]
+   [One line: why this matters]
 
-### Suggested Structure
-[If NOT MECE, provide the corrected MECE breakdown as a clean tree]
+🟡 GAP: [What's missing]
+   [One line: why this matters]
+
+🟢 MINOR GAP: [What's missing]
+   [One line: why this matters]
+
+Fix these now?
+```
+
+**IMPORTANT**: Always end the report by asking the user if they want you to fix the issues. Do not fix automatically. Wait for confirmation.
+
+**Step 6 — After user confirms, apply the fix**
+
+When the user says yes, fix it, go ahead, or similar:
+
+1. Apply all fixes (merge overlaps, add missing categories, redraw boundaries)
+2. Show what changed using this format:
+
+```
+✓ [Action taken — e.g., Merged "X" + "Y" → "Z"]
+✓ [Action taken — e.g., Added "Category" (was critical gap)]
+[repeat for each fix]
+
+[Show the corrected MECE structure as a clean tree using ├── and └──]
+
+MECE Score: 100/100 — All things are MECE. ✓
+```
+
+**If the structure is already MECE**, skip the fix flow entirely and output:
+
+```
+MECE Score: 100/100
+
+Categories reviewed: [N]
+Overlaps found: 0
+Gaps found: 0
+
+All things are MECE. ✓
 ```
 
 ### 2. Decompose (when given a topic or problem to break down)
@@ -87,6 +119,7 @@ When the user says "break down X" or "decompose X" or provides `$ARGUMENTS`:
 **Step 3 — Self-validate**
 - Run the validation checks from Mode 1 against your own output
 - Fix any overlaps or gaps before presenting
+- You must pass your own MECE test before showing the user
 
 **Step 4 — Deliver the tree**
 
@@ -98,12 +131,15 @@ Format as:
 [What's included / excluded]
 
 ### Breakdown
-[Tree structure using ├── and └── characters]
+[Tree structure using ├── and └── characters, 2-3 levels deep]
 
-### Validation
-- Mutual Exclusivity: [✓ confirmed — each item fits exactly one branch]
-- Collective Exhaustiveness: [✓ confirmed — all scenarios covered]
-- [Or list any remaining edge cases the user should decide on]
+MECE Score: 100/100 — All things are MECE. ✓
+```
+
+If there are edge cases that could reasonably go in multiple branches, call them out:
+```
+Edge case: [item] could fit [Branch A] or [Branch B].
+Placed in [Branch A] because [reasoning].
 ```
 
 ## Rules
@@ -115,6 +151,8 @@ Format as:
 5. **Flag "Other" buckets.** An "Other/Miscellaneous" category is a sign of incomplete thinking. If one exists, try to decompose it further or explicitly define what belongs there.
 6. **Respect scope boundaries.** Don't flag gaps for things the user explicitly scoped out.
 7. **Show your reasoning.** For each overlap or gap, explain *why* it matters — not just that it exists.
+8. **Always ask before fixing.** Report first, then ask. Never auto-fix in validate mode.
+9. **End with the line.** Every completed MECE check ends with "All things are MECE. ✓" — this is the user's signal that the structure is sound.
 
 ## Context
 
