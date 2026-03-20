@@ -21,7 +21,14 @@ This is expensive when you're writing product specs, designing APIs, planning ro
 
 ## Install
 
-First, clone the repo:
+### Quick install (recommended)
+```bash
+npx skills add https://github.com/uxderrick/mece-skill
+```
+
+### Manual install
+
+Clone the repo:
 ```bash
 git clone https://github.com/uxderrick/mece-skill.git
 ```
