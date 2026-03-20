@@ -23,11 +23,8 @@ This is expensive when you're writing product specs, designing APIs, planning ro
 
 ### Claude Code
 ```bash
-# Via plugin marketplace
-/plugin marketplace add uxderrick/mece-skill
-
-# Or manual
 git clone https://github.com/uxderrick/mece-skill.git
+mkdir -p ~/.claude/skills
 cp -r mece-skill/skills/mece ~/.claude/skills/mece
 ```
 
